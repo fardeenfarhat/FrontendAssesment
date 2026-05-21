@@ -1,0 +1,68 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* ── Two-column body ──────────────────────────────────────────── */
+.body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  padding: 12px 40px 24px;
+  gap: 16px;
+}
+
+/* Left: prompt sidebar */
+.promptWrap {
+  width: 320px;
+  flex-shrink: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: none;
+}
+.promptWrap::-webkit-scrollbar { display: none; }
+
+/* Right: gallery */
+.resultsWrap {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 0;
+  scrollbar-width: thin;
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 1280px) {
+  .body { padding: 12px 28px 20px; }
+  .promptWrap { width: 300px; }
+}
+
+@media (max-width: 1023px) {
+  .body { padding: 12px 20px 16px; }
+  .promptWrap { width: 280px; }
+}
+
+@media (max-width: 767px) {
+  .body {
+    flex-direction: column;
+    padding: 8px 12px 16px;
+    gap: 10px;
+    overflow-y: auto;
+  }
+  .promptWrap {
+    width: 100%;
+    flex-shrink: 0;
+    max-height: none;
+  }
+  .resultsWrap {
+    overflow-y: visible;
+    padding: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .body { padding: 6px 10px 12px; gap: 8px; }
+}
