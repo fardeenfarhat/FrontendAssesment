@@ -94,3 +94,9 @@
 @media (max-width: 480px) {
   .wrapper { padding: 6px 12px 0; }
 }
+
+@media (max-width: 380px) {
+  .historyLabel { display: none; }
+  .divider { display: none; }
+  .scroll { padding-right: 40px; }
+}

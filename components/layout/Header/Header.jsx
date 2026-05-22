@@ -10,8 +10,8 @@ const TOOL_MODES = [
   { id: "home",    label: "Home",    icon: "home"    },
   { id: "gallery", label: "Gallery", icon: "image"   },
   { id: "video",   label: "Video",   icon: "video"   },
-  { id: "audio",   label: "Audio",   icon: "mic-off" },
-  { id: "files",   label: "Files",   icon: "folder"  },
+  { id: "audio",   label: "Audio",   icon: "mic-off", mobileHide: true },
+  { id: "files",   label: "Files",   icon: "folder",  mobileHide: true },
 ];
 
 export default function Header() {
@@ -26,9 +26,14 @@ export default function Header() {
   useEffect(() => {
     function updatePill() {
       const idx = TOOL_MODES.findIndex((m) => m.id === activeMode);
-      const btn = btnRefs.current[idx];
+      let btn = btnRefs.current[idx];
       const nav = navRef.current;
-      if (!btn || !nav) return;
+      if (!nav) return;
+      // If active button is hidden (display:none), fall back to first visible button
+      if (!btn || btn.offsetParent === null) {
+        btn = btnRefs.current.find((b) => b && b.offsetParent !== null);
+        if (!btn) return;
+      }
       const btnRect = btn.getBoundingClientRect();
       const navRect = nav.getBoundingClientRect();
       setPillLeft(btnRect.left - navRect.left + btnRect.width / 2);
@@ -58,7 +63,7 @@ export default function Header() {
               type="button"
               aria-label={mode.label}
               aria-pressed={activeMode === mode.id}
-              className={`${styles.modeBtn} ${activeMode === mode.id ? styles.modeBtnActive : ""}`}
+              className={`${styles.modeBtn}${activeMode === mode.id ? ` ${styles.modeBtnActive}` : ""}${mode.mobileHide ? ` ${styles.modeBtnMobileHide}` : ""}`}
               onClick={() => setActiveMode(mode.id)}
             >
               <Icon name={mode.icon} size={19} />

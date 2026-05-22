@@ -98,8 +98,41 @@ lib/    api client, constants (models/styles), mocks (images/videos/history), ut
 
 | Viewport | Layout |
 |---|---|
-| 320px | Single column, history drawer |
+| 320px | Single column, condensed header |
 | 375px | Single column |
-| 768px | Prompt + Results, no sidebar |
-| 1024px | Full 3-column |
-| 1440px | Full 3-column, wider grid |
+| 390px | Single column (iPhone 14) |
+| 768px | Prompt sidebar + Results |
+| 1280px | Full layout |
+| 1440px | Full layout, wider grid |
+
+### Screenshots
+
+#### Desktop (1440px)
+| Light | Dark |
+|---|---|
+| ![Desktop 1440 Light](screenshots/desktop-1440-light.png) | ![Desktop 1440 Dark](screenshots/desktop-1440-dark.png) |
+
+#### Desktop (1280px)
+| Light | Dark |
+|---|---|
+| ![Desktop 1280 Light](screenshots/desktop-1280-light.png) | ![Desktop 1280 Dark](screenshots/desktop-1280-dark.png) |
+
+#### Tablet (768px)
+| Light | Dark |
+|---|---|
+| ![Tablet 768 Light](screenshots/tablet-768-light.png) | ![Tablet 768 Dark](screenshots/tablet-768-dark.png) |
+
+#### Mobile (390px — iPhone 14)
+| Light | Dark |
+|---|---|
+| ![Mobile 390 Light](screenshots/mobile-390-light.png) | ![Mobile 390 Dark](screenshots/mobile-390-dark.png) |
+
+#### Mobile (375px — iPhone SE)
+| Light | Dark |
+|---|---|
+| ![Mobile 375 Light](screenshots/mobile-375-light.png) | ![Mobile 375 Dark](screenshots/mobile-375-dark.png) |
+
+#### Mobile (320px — minimum supported)
+| Light | Dark |
+|---|---|
+| ![Mobile 320 Light](screenshots/mobile-320-light.png) | ![Mobile 320 Dark](screenshots/mobile-320-dark.png) |

@@ -20,10 +20,12 @@ export async function POST(request) {
     const pool = type === "video" ? mockVideos : mockImages;
     const items = Array.from({ length: sanitizedCount }, (_, i) => {
       const base = pool[Math.floor(Math.random() * pool.length)];
+      // Cache-bust image URLs so Next.js treats each as unique; video CDN URLs are stable
+      const url = base.type === "video" ? base.url : `${base.url}?cache=${Date.now()}-${i}`;
       return {
         ...base,
         id: generateId("item"),
-        url: `${base.url}?cache=${Date.now()}-${i}`,
+        url,
       };
     });
 

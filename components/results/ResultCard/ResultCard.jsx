@@ -7,6 +7,7 @@ import styles from "./ResultCard.module.css";
 
 const ResultCard = memo(function ResultCard({ item }) {
   const [liked, setLiked] = useState(false);
+  const [playing, setPlaying] = useState(false);
 
   function handleDownload(e) {
     e.stopPropagation();
@@ -30,18 +31,38 @@ const ResultCard = memo(function ResultCard({ item }) {
     <div className={styles.card}>
       <div className={styles.imgWrap}>
         {item.type === "video" ? (
-          <div className={styles.videoThumb}>
-            <Image
-              src={item.poster || item.url}
-              alt={item.alt}
-              fill
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              className={styles.img}
+          playing ? (
+            <video
+              src={item.url}
+              poster={item.poster}
+              className={styles.video}
+              controls
+              autoPlay
+              muted
+              loop
+              playsInline
             />
-            <div className={styles.playOverlay} aria-hidden="true">
-              <Icon name="play" size={24} />
-            </div>
-          </div>
+          ) : (
+            <>
+              <Image
+                src={item.poster || item.url}
+                alt={item.alt}
+                fill
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                className={styles.img}
+              />
+              <button
+                type="button"
+                className={styles.playOverlay}
+                onClick={(e) => { e.stopPropagation(); setPlaying(true); }}
+                aria-label="Play video"
+              >
+                <span className={styles.playBtn}>
+                  <Icon name="play" size={20} />
+                </span>
+              </button>
+            </>
+          )
         ) : (
           <Image
             src={item.url}
