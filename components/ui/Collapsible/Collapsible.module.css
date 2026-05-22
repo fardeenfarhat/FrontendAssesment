@@ -1,0 +1,42 @@
+.root {
+  width: 100%;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 9px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.15s, border-color 0.15s;
+  box-shadow: var(--shadow-xs);
+}
+
+.trigger:hover {
+  background: var(--surface-2);
+  border-color: var(--border-2);
+}
+
+.title {
+  font-weight: 500;
+}
+
+.icon {
+  color: var(--text-3);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.iconOpen { transform: rotate(180deg); }
+
+.content {
+  padding: 10px 4px;
+  animation: fadeIn 0.15s ease;
+}

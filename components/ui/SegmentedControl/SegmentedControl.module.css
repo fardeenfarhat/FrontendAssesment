@@ -1,0 +1,39 @@
+.root {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px;
+  background: var(--surface-3);
+  border-radius: 999px;
+}
+
+.tab {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+  background: none;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.15s, background 0.18s;
+  white-space: nowrap;
+}
+
+.tab:hover { color: var(--text); }
+
+.active {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 1px 4px rgba(0,0,0,.10), 0 0 0 0.5px var(--border);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+}

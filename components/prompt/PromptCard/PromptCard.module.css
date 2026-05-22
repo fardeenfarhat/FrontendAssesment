@@ -1,0 +1,49 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--sidebar-bg);
+  border-radius: var(--radius-2xl);
+  padding: 14px;
+  box-shadow: var(--shadow-md);
+}
+
+/* Image/Video toggle wrapper */
+.toggleWrap {
+  flex-shrink: 0;
+}
+
+/* White prompt container */
+.promptBox {
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 210px;
+  box-shadow: var(--shadow-xs);
+}
+
+/* Generate button row at bottom of prompt box */
+.generateRow {
+  padding: 10px 12px 12px;
+  flex-shrink: 0;
+}
+
+/* 3-pill controls row */
+.controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 5;
+}
+
+/* Collapsible accordion panels */
+.collapsibles {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}

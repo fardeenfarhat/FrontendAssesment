@@ -1,0 +1,45 @@
+.root {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.textarea {
+  flex: 1;
+  resize: none;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.7;
+  padding: 16px 16px 8px;
+  min-height: 120px;
+  font-family: inherit;
+  font-weight: 400;
+}
+
+.textarea::placeholder {
+  color: var(--text-3);
+  font-weight: 400;
+}
+
+.charCount {
+  text-align: right;
+  font-size: 11px;
+  color: var(--text-3);
+  padding: 0 14px 6px;
+}
+
+.charCountWarn { color: var(--accent); }
