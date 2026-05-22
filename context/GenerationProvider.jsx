@@ -54,7 +54,7 @@ function reducer(state, action) {
         type: state.mediaType,
         model: state.model,
         createdAt: new Date().toISOString(),
-        thumbnail: action.payload.items[0]?.url,
+        thumbnail: action.payload.items[0]?.poster || action.payload.items[0]?.url,
         items: action.payload.items,
       };
       return {
