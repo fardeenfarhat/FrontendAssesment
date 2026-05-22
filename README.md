@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AI Content Generator
 
-## Getting Started
+A responsive AI content generation web app built with Next.js 16, React 19, Tailwind CSS v4, and CSS Modules — implemented as a frontend technical assessment.
 
-First, run the development server:
+---
+
+## Tech Stack
+
+| Layer | Choice |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Language | JavaScript |
+| Styling | Tailwind CSS v4 + CSS Modules |
+| Animation | Framer Motion |
+| State | React Context + useReducer |
+| Images | `next/image` with picsum.photos mock |
+
+---
+
+## Setup & Running Locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Open http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Production build:**
+```bash
+npm run build && npm start
+```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Structure
 
-## Learn More
+```
+app/
+├── api/generate/route.js   # Dummy POST endpoint
+├── globals.css             # Design tokens (CSS vars) + Tailwind
+├── layout.js               # Root layout with Providers
+└── page.js                 # Renders AppShell
 
-To learn more about Next.js, take a look at the following resources:
+components/
+├── layout/   AppShell, Header, Providers
+├── history/  HistoryPanel, HistoryStrip, HistoryThumbnail, HistoryDrawer
+├── prompt/   PromptCard, PromptInput, MediaToggle, ModelSelector,
+│             ImageCountSelector, AdvancedPanel, StylesPanel, GenerateButton
+├── results/  ResultsGrid, ResultCard, ResultSkeleton
+├── theme/    ThemeToggle
+└── ui/       Button, IconButton, Dropdown, SegmentedControl,
+              Collapsible, Icon
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+context/
+├── ThemeProvider.jsx       # theme + toggleTheme (localStorage + system pref)
+└── GenerationProvider.jsx  # All generation state via useReducer
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+hooks/  useMediaQuery
+lib/    api client, constants (models/styles), mocks (images/videos/history), utils
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Key Design Decisions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Tailwind v4 + CSS Modules together** — Tailwind handles layout, spacing, and responsive utilities. CSS Modules hold complex component styles (gradient buttons, shimmer, hover overlays) that would be awkward as utility strings.
+
+**CSS variables for theming** — All colours live as `--accent`, `--bg`, `--surface`, etc. The `.dark` class on `<html>` swaps them. No Tailwind `dark:` utilities needed — every component is automatically theme-aware.
+
+**Context + useReducer, no global store** — State split into two contexts (state / dispatch) to avoid re-rendering consumers that only read one slice. `React.memo` on `ResultCard` and `HistoryThumbnail`.
+
+**Dummy API shape** — `POST /api/generate` accepts `{ prompt, type, model, count }`, waits 900–1500ms, returns `{ id, type, prompt, items[], createdAt }` — the same contract a real model API would return.
+
+**Mobile-first responsive** — Three layouts: ≤767px (single-column, history drawer), 768–1023px (two-column), ≥1024px (full three-column mockup layout).
+
+---
+
+## Features
+
+- Prompt textarea with character count
+- Image / Video mode toggle
+- Image count selector (1 / 2 / 4 / 8)
+- Model selector dropdown (5 mock models)
+- Advanced panel: CFG scale, steps, seed, negative prompt
+- Styles panel: multi-select style chips
+- Orange gradient Generate button with spinner
+- 4-col results grid → 3-col → 2-col (responsive)
+- Hover overlay: Like / Download / Share per image
+- Shimmer skeleton loading state
+- History sidebar + horizontal header strip
+- Mobile history slide-in drawer
+- Dark mode (localStorage + `prefers-color-scheme` default)
+- Accessibility: semantic HTML, `aria-*` attributes, visible focus rings, alt text
+
+---
+
+## Responsiveness Tested
+
+| Viewport | Layout |
+|---|---|
+| 320px | Single column, history drawer |
+| 375px | Single column |
+| 768px | Prompt + Results, no sidebar |
+| 1024px | Full 3-column |
+| 1440px | Full 3-column, wider grid |
